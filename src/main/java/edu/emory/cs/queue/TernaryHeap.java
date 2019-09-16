@@ -71,7 +71,7 @@ public class TernaryHeap <T extends Comparable<T>> extends AbstractPriorityQueue
             //from while loop, if newly added value is proven to have larger keys, it then uses swap.
             Collections.swap(keys, (int)((k/3.0)+(1.0/3.0)), k);
             //after swap, it needs to find the new parent. K becomes the new parent after the calculation and while loop continues
-            k = (int)((k/3.0)+(1.0/3.0));
+            k = (int)((k/3.0)+(1.0/3.0));.
         }
     }
 */
