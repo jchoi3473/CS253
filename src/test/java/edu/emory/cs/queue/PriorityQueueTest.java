@@ -60,7 +60,7 @@ public class PriorityQueueTest {
     public void testSpeed() {
     // testSpeed(new LazyPriorityQueue<>(), new EagerPriorityQueue<>(), new BinaryHeap<>(), new TernaryHeap<>())
         // testSpeed(new BinaryHeap<>());
-     //   testSpeed(new TernaryHeap<>());
+       // testSpeed(new TernaryHeap<>());
         testSpeed(new BinaryHeap<>(),new TernaryHeap<>());
     }
 

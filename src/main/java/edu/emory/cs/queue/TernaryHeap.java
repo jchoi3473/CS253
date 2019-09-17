@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.lang.Math;
 
 public class TernaryHeap <T extends Comparable<T>> extends AbstractPriorityQueue<T>{
     private List<T> keys;
@@ -50,29 +49,14 @@ public class TernaryHeap <T extends Comparable<T>> extends AbstractPriorityQueue
         }
     }
 
-    public void swim(int k){
-        //a rounded value of any one of 3 children/3.0 equals the value of its parent.
-        //because division of children/3 only yields integer, usage of double is needed in this case.
-        //After the division, it gets converted into int type so that it matches its parent type(int)
-        while (1 < k && comparator.compare(keys.get((int)Math.round(k/3.0)), keys.get(k)) < 0) {
-           //from while loop, if newly added value is proven to have larger keys, it then uses swap.
-            Collections.swap(keys, (int)Math.round(k/3.0), k);
-            //after swap, it needs to find the new parent. K becomes the new parent after the calculation and while loop continues
-            k = (int)Math.round(k/3.0);
-        }
+public void swim(int k){
+    //calculation of k+1/3 for all 3 children will lead to only one parent.
+    //ex)(2+1)/3=1,(3+1)/3=3,(4+1)/3=3 because they're types are int.
+    while (1 < k && comparator.compare(keys.get((k+1)/3), keys.get(k)) < 0) {
+        //from while loop, if newly added value is proven to have larger keys, it then uses swap.
+        Collections.swap(keys, (k+1)/3, k);
+        //after swap, it needs to find the new parent. K becomes the new parent after the calculation and while loop continues
+        k = (k+1)/3;
     }
-
-     /*
-    public void swim(int k){
-        //a rounded value of any one of 3 children/3.0 equals the value of its parent.
-        //because division of children/3 only yields integer, usage of double is needed in this case.
-        //After the division, it gets converted into int type so that it matches its parent type(int)
-        while (1 < k && comparator.compare(keys.get((int)((k/3.0)+(1.0/3.0))), keys.get(k)) < 0) {
-            //from while loop, if newly added value is proven to have larger keys, it then uses swap.
-            Collections.swap(keys, (int)((k/3.0)+(1.0/3.0)), k);
-            //after swap, it needs to find the new parent. K becomes the new parent after the calculation and while loop continues
-            k = (int)((k/3.0)+(1.0/3.0));.
-        }
-    }
-*/
+}
 }
