@@ -32,6 +32,8 @@ public class ShellSortPratt<T extends Comparable<T>> extends ShellSort<T> {
                 threeN++;
             }
             if(n<=sequence.get(indic-1)*2) break;
+
+
         }
     }
 */
