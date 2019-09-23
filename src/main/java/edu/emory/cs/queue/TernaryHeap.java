@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.lang.Math;
 
 public class TernaryHeap <T extends Comparable<T>> extends AbstractPriorityQueue<T>{
     private List<T> keys;
@@ -59,4 +60,15 @@ public void swim(int k){
         k = (k+1)/3;
     }
 }
+
+/*
+
+    public void swim(int k){
+        while (1 < k && comparator.compare(keys.get((int)Math.round(k/3.0)), keys.get(k)) < 0) {
+            Collections.swap(keys, (int)Math.round(k/3.0), k);
+            k = (int)Math.round(k/3.0);
+        }
+    }
+
+ */
 }
