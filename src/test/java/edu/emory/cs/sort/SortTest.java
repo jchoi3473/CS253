@@ -72,7 +72,7 @@ public class SortTest {
     public void testSpeed() {
 //      testSpeed(new HeapSort<>(), new ShellSortKnuth<>(), new SelectionSort<>(), new InsertionSort<>());
 //      testSpeed(new ShellSortHibbard<>());
-      testSpeed(new ShellSortPratt<>());
+      testSpeed(new ShellSortPratt<>(),new SelectionSort<>());
 //      testSpeed(new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new QuickSort<>(), new IntroSort<>(new HeapSort<Integer>()), new IntroSort<>(new ShellSortKnuth<Integer>()));
     }
 
