@@ -14,7 +14,6 @@ public class ShellSortPratt<T extends Comparable<T>> extends ShellSort<T> {
 
     @Override
     protected void populateSequence(int n) {
-
         /*
         For this method, I multiplied the number by 2 for a number in a sequence that indic is referring to.
         indic*2 stops when it becomes bigger than 3^n. It continues when 3^n is added into the sequence.
@@ -23,13 +22,14 @@ public class ShellSortPratt<T extends Comparable<T>> extends ShellSort<T> {
         /*Because ArrayList has a dynamic size and tend to remove and make a new arraylist everytime it goes
         through an iteration, it was best to create a new sequence with n/10 in the beginning.
          */
+
         this.sequence = new ArrayList<>(n/10);
         //if I don't do n/3, it will make a comparison of less than two numbers which causes an inefficiency.
         n= n/3;
         sequence.add(1);
         int indic = 0;
         int threeN = 1;
-       for(int i =0;;){
+         for(int t = sequence.size() +1;;t++){
             if(sequence.get(indic)*2<(int)Math.pow(3,threeN)){
                 sequence.add(sequence.get(indic)*2);
                 indic++;
@@ -48,7 +48,7 @@ pratt sequence includes numbers with 2^n, 3^n, 6*number. For 6*number, number is
  */
 /*
         this.sequence = new ArrayList<>(n/10);
-        n=n/3;
+        n=n/7;
         sequence.add(1);
         int seqInd = 0, pow2 = 1, pow3 = 1;
         //for (int i = sequence.size()-1; ; i++) {
@@ -70,8 +70,8 @@ pratt sequence includes numbers with 2^n, 3^n, 6*number. For 6*number, number is
             }
         }
     }
-    */
-    /*
+*/
+/*
     Same as previous method, but has less efficiency because of the way it is written.
         sequence.add(1);
         int seqInd = 0,pow2 =1, pow3 =1;
@@ -98,7 +98,7 @@ pratt sequence includes numbers with 2^n, 3^n, 6*number. For 6*number, number is
     @Override
     protected int getSequenceStartIndex(int n) {
         //because I declared n/3 in the populate sort, it is reasonable to declare a key n/3
-        int index = Collections.binarySearch(sequence, n/3);
+        int index = Collections.binarySearch(sequence, n/7);
         if (index < 0) index = -(index + 1);
         if (index == sequence.size()) index--;
         return index;
