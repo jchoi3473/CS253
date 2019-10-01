@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.emory.cs.sort.SortTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-10-01T03:05:47" hostname="DESKTOP-2NQTQ1T" time="16.951">
+  <properties/>
+  <testcase name="testSpeed" classname="edu.emory.cs.sort.SortTest" time="16.951"/>
+  <system-out><![CDATA[1000	103	148	0	0	0	0
+2000	248	146	0	0	0	0
+3000	333	213	0	0	0	0
+4000	430	344	0	0	0	0
+5000	514	434	0	0	0	0
+6000	602	541	0	0	0	0
+7000	696	609	0	0	0	0
+8000	778	727	0	0	0	0
+9000	865	766	0	0	0	0
+10000	968	847	0	0	0	0
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
