@@ -31,29 +31,24 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
         keys = new ArrayList<>();
         keys.add(null);    // initialize the first item as null
     }
-
     public BinaryHeap() {
         this(Comparator.naturalOrder());
     }
-
     @Override
     public int size() {
         return keys.size() - 1;
     }
-
     @Override
     public void add(T key) {
         keys.add(key);
         swim(size());
     }
-
     private void swim(int k) {
         while (1 < k && comparator.compare(keys.get(k / 2), keys.get(k)) < 0) {
             Collections.swap(keys, k / 2, k);
             k /= 2;
         }
     }
-
     @Override
     public T remove() {
         if (isEmpty()) return null;

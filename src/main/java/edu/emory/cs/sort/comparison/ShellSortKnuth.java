@@ -16,6 +16,7 @@
  */
 package edu.emory.cs.sort.comparison;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -37,6 +38,7 @@ public class ShellSortKnuth<T extends Comparable<T>> extends ShellSort<T> {
 
     @Override
     protected void populateSequence(int n) {
+        this.sequence = new ArrayList<>(n/10);
         n /= 3;
 
         for (int t = sequence.size() + 1; ; t++) {

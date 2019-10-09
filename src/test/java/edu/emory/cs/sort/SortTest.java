@@ -15,21 +15,15 @@
  */
 package edu.emory.cs.sort;
 
-import edu.emory.cs.sort.comparison.HeapSort;
-import edu.emory.cs.sort.comparison.InsertionSort;
-import edu.emory.cs.sort.comparison.SelectionSort;
-import edu.emory.cs.sort.comparison.ShellSortKnuth;
-import edu.emory.cs.sort.distribution.IntegerBucketSort;
-import edu.emory.cs.sort.distribution.LSDRadixSort;
 //import edu.emory.cs.sort.divide_conquer.IntroSort;
 //import edu.emory.cs.sort.divide_conquer.MergeSort;
 //import edu.emory.cs.sort.divide_conquer.QuickSort;
-import edu.emory.cs.sort.distribution.MSDRadixSort;
+import edu.emory.cs.sort.divide_conquer.QuickSort;
+import edu.emory.cs.sort.hybrid.HybridSortP2;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Random;
+        import java.util.Random;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -56,7 +50,7 @@ public class SortTest {
         testAccuracy(iter, size, new IntroSort<>(new ShellSortKnuth<Integer>()));
 */
 //        testAccuracy(iter, size, new IntegerBucketSort(0, size));
-        testAccuracy(iter, size, new MSDRadixSort());
+        testAccuracy(iter, size, new HybridSortP2<>());
     }
 
     private void testAccuracy(final int iter, final int size, AbstractSort<Integer> engine) {
@@ -77,10 +71,10 @@ public class SortTest {
     @Test
     public void testSpeed() {
         final int max_size = 10000;
-        testSpeed(max_size, new MSDRadixSort(), new LSDRadixSort());
+        testSpeed(max_size, new QuickSort<>(), new HybridSortP2<>());
 //      testSpeed(max_size, new HeapSort<>(), new ShellSortKnuth<>(), new SelectionSort<>(), new InsertionSort<>());
-//        testSpeed(max_size, new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new QuickSort<>(), new IntroSort<>(new HeapSort<Integer>()), new IntroSort<>(new ShellSortKnuth<Integer>()));
-//        testSpeed(max_size, new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new QuickSort<>(), new IntegerBucketSort(0, max_size), new LSDRadixSort());
+//        testSpeed(max_size, new QuickSort<>(), new IntroSort<>(new HeapSort<Integer>()));
+//        testSpeed(max_size, new HeapSort<>(), new ShellSortKnuth<>(), new MergeSort<>(), new QuickSort<>());
     }
 
 
@@ -119,7 +113,7 @@ public class SortTest {
         for (int i = 0; i < iter; i++) {
             Integer[] keys = Stream.generate(() -> rand.nextInt(size)).limit(size).toArray(Integer[]::new);
 //          Arrays.sort(keys);
-          Arrays.sort(keys, Comparator.reverseOrder());
+//          Arrays.sort(keys, Comparator.reverseOrder());
 
             for (int j = 0; j < engines.length; j++)
                 addRuntime(engines[j], ts[j], Arrays.copyOf(keys, size));

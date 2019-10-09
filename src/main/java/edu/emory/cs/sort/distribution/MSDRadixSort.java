@@ -1,8 +1,11 @@
 package edu.emory.cs.sort.distribution;
 
-import java.util.Comparator;
+import edu.emory.cs.sort.AbstractSort;
+import edu.emory.cs.sort.comparison.InsertionSort;
 
 public class MSDRadixSort extends RadixSort {
+    private AbstractSort<Integer> engine = new InsertionSort<Integer>();
+
     //For MSDRadixSort, I used a recursion method.
     //This method helps to find the maxBit and sends it to the recursive method.
     //I decided to declare maxBit here so that it only runs once and the value stays the same
@@ -15,29 +18,18 @@ public class MSDRadixSort extends RadixSort {
     //this is the recursive method that i used to operate MSD
     public void sort(Integer[] array, int beginIndex, int endIndex, int m) {
         //
-        int[] counter = new int[12]; //this array contains index numbers so that i can keep track of the bucket within the array
-        if(m<=0) return;
-        int div = (int) Math.pow(10, m-1);
-        sort(array,beginIndex,endIndex,k -> k/div);
-        for(int i=0;i<10;i++){ //i made temp array in the bucket sort and this kept number of elements in each bucket. By this operation, it now contains index of numbers representing each bucket
-            temp[i+1]+=temp[i];
-        }
-        for(int i=0;i<temp.length;i++) //because beginIndex starts from 0, i created counter array that has the first element as 0 and the rest same as temp, an index array.
-            counter[i+1]=temp[i];
-    /*
-        for(int i=0;i<11;i++){
-            System.out.print(temp[i]+"\t");
-        }
-        System.out.println();
-        for(int i=0;i<11;i++){
-        System.out.print(counter[i]+"\t");
-        }
-        System.out.println();
-*/
-
-        for(int i=0;i<10;i++){//this is the recursive method that i adopted, it goes around the index, and m(maxbit)-1 makes it to move to the lesser significant digit
-            sort(array,beginIndex+counter[i],beginIndex+counter[i+1],m-1);
-        }
+            int[] counter = new int[12]; //this array contains index numbers so that i can keep track of the bucket within the array
+            if (m <= 0) return;
+            int div = (int) Math.pow(10, m - 1);
+            sort(array, beginIndex, endIndex, k -> k / div);
+            for (int i = 0; i < 10; i++) { //i made temp array in the bucket sort and this kept number of elements in each bucket. By this operation, it now contains index of numbers representing each bucket
+                temp[i + 1] += temp[i];
+            }
+            for (int i = 0; i < temp.length; i++) //because beginIndex starts from 0, i created counter array that has the first element as 0 and the rest same as temp, an index array.
+                counter[i + 1] = temp[i];
+            for (int i = 0; i < 10; i++) {//this is the recursive method that i adopted, it goes around the index, and m(maxbit)-1 makes it to move to the lesser significant digit
+                sort(array, beginIndex + counter[i], beginIndex + counter[i + 1], m - 1);
+            }
         /*
         for(int i=0;i<array.length;i++){
             System.out.print(array[i]+"\t");
