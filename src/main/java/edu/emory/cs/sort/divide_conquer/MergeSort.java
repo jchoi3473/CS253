@@ -79,7 +79,6 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
             N = endIndex - beginIndex;
             System.arraycopy(array, beginIndex, temp, beginIndex, N);
         }
-
         assignments += N;
     }
 }

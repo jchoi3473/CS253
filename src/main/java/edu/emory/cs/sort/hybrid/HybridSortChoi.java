@@ -50,7 +50,7 @@ public T[] sort(T[][] input) {
         beginIndex += t.length;
     }
 
-    engine3.sort(output);
+    engine.sort(output);
     return output;
     }
 

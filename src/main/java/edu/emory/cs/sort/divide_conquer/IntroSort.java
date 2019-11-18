@@ -16,8 +16,6 @@
 package edu.emory.cs.sort.divide_conquer;
 
 import edu.emory.cs.sort.AbstractSort;
-import edu.emory.cs.sort.comparison.HeapSort;
-import edu.emory.cs.sort.comparison.InsertionSort;
 import edu.emory.cs.utils.Utils;
 
 import java.util.Comparator;
@@ -27,8 +25,6 @@ import java.util.Comparator;
  */
 public class IntroSort<T extends Comparable<T>> extends QuickSort<T> {
     private AbstractSort<T> engine;
-    private AbstractSort<T> engine2;
-
 
     public IntroSort(AbstractSort<T> engine) {
         this(engine, Comparator.naturalOrder());
@@ -37,7 +33,6 @@ public class IntroSort<T extends Comparable<T>> extends QuickSort<T> {
     public IntroSort(AbstractSort<T> engine, Comparator<T> comparator) {
         super(comparator);
         this.engine = engine;
-        engine2 = new InsertionSort<>();
     }
 
     @Override
@@ -55,19 +50,14 @@ public class IntroSort<T extends Comparable<T>> extends QuickSort<T> {
     }
 
     private void introsort(T[] array, int beginIndex, int endIndex, int maxdepth) {
-        if(endIndex-beginIndex+1<10){
-            engine2.sort(array,beginIndex,endIndex);
-        }
-        else {
-            if (beginIndex >= endIndex) return;
+        if (beginIndex >= endIndex) return;
 
-            if (maxdepth == 0)    // encounter the worst case
-                engine.sort(array, beginIndex, endIndex);
-            else {
-                int pivotIndex = partition(array, beginIndex, endIndex);
-                introsort(array, beginIndex, pivotIndex, maxdepth - 1);
-                introsort(array, pivotIndex + 1, endIndex, maxdepth - 1);
-            }
+        if (maxdepth == 0)    // encounter the worst case
+            engine.sort(array, beginIndex, endIndex);
+        else {
+            int pivotIndex = partition(array, beginIndex, endIndex);
+            introsort(array, beginIndex, pivotIndex, maxdepth - 1);
+            introsort(array, pivotIndex + 1, endIndex, maxdepth - 1);
         }
     }
 

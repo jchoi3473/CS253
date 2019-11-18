@@ -60,15 +60,15 @@ public class HybridSortTest {
         double ratio = 0.25;
         int row = 100, col = 100;
 
-        //for (col=100; col<=1000; col+=100) {
-            for (row = 100; row <= 1000; row += 100) {
+        for (col=100; col<=1000; col+=100) {
+            //for (row = 100; row <= 1000; row += 100) {
                 long[] time = testSpeed(row, col, ratio, gold, mine);
                 StringJoiner join = new StringJoiner("\t");
                 join.add(String.format("Row: %d, Col: %d, ratio: %4.2f", row, col, ratio));
                 for (long t : time) join.add(Long.toString(t));
                 System.out.println(join.toString());
             }
-       // }
+        //}
     }
 
     /**
