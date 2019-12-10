@@ -150,6 +150,17 @@ public class MSTWordChoi extends MSTWord {
         SpanningTree tree = mst.getMinimumSpanningTree();
         mst.printSpanningTree(new FileOutputStream(OUTPUT_FILE), tree);
         System.out.println(tree.getTotalWeight());
+
+        System.out.println(mst.getShortestPath(0,0));
+        System.out.println(mst.getShortestPath(1,128));
+        System.out.println(mst.getShortestPath(3,125));
+        System.out.println(mst.getShortestPath(5,127));
+        System.out.println(mst.getShortestPath(124,175));
+        System.out.println(mst.getShortestPath(161,283));
+        System.out.println(mst.getShortestPath(472,273));
+        System.out.println(mst.getShortestPath(127,132));
+        System.out.println(mst.getShortestPath(161,137));
+        System.out.println(mst.getShortestPath(448,274));
     }
 }
 

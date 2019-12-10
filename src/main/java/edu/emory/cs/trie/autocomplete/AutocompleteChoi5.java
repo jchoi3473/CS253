@@ -5,15 +5,16 @@ import edu.emory.cs.trie.TrieNode;
 
 import java.util.*;
 
-public class AutocompleteChoi extends Autocomplete<List<String>> {
+public class AutocompleteChoi5 extends Autocomplete<List<String>> {
     List<String> result ;
     Queue<String> stringQueue ;
     Queue<TrieNode<List<String>>> nodeQueue;
     TrieNode<List<String>> node;
 
-    public AutocompleteChoi(String dict_file, int max) {
+    public AutocompleteChoi5(String dict_file, int max) {
         super(dict_file, max);
     }
+
     /*
     Traverse tries using BFS. Used 2 queues to store node and accumulating string in order to achieve BFS.
     1st while - Iterate until list of complete strings hits getMax()
@@ -27,48 +28,18 @@ public class AutocompleteChoi extends Autocomplete<List<String>> {
         prefix = prefix.replaceAll("\\s+","");//trim all white spaces
         //get a node up to the end of the prefix
         node = find(prefix);
-        if(node == null){ //adding prefix not in a dictionary but is not a word(End State = False)
+        if(node == null){
+            System.out.println("null detected");
             put(prefix,null);
             node = find(prefix);
             node.setEndState(false);
-            return new ArrayList<>();
-        }
-        if(node.getValue()!=null) {//if node already contains a list as its value, return its value
-            List<String> temp = node.getValue();
-            int num = temp.size();
-            List<String> newList = creatList(prefix);
-
-            for(int i=0;i<num;i++){//need to add newly added elements in tries to the list
-                if(!newList.contains(temp.get(0))){
-                    newList.add(i,temp.get(0));
-                    temp.remove(0);
-                }
-                else if(!newList.get(i).equals(temp.get(0))){
-                    if(!temp.contains(newList.get(i))){//newly introduced
-                        temp.remove(0);
-                    }
-                    else {
-                        newList.remove(temp.get(0));
-                        newList.add(i, temp.get(0));
-                        temp.remove(0);
-                    }
-                }
-                else {
-                    temp.remove(0);
-                }
-            }
-            node.setValue(newList);
-            return newList;
-        }
-        else {
-            result=creatList(prefix);
-            node.setValue(result);//set the result list as node's value
+            result = new ArrayList<>();
             return result;
         }
-    }
-    //Create a list that gets an original form of list from trie using BFS, main trie >> List orient algorithm
-    public List<String> creatList(String prefix){
-        node = find(prefix);
+        if(node.getValue()!=null) {//if node already contains a list as its value, return its value
+            return node.getValue();
+        }
+        else {
         result = new ArrayList<>();
         stringQueue = new LinkedList<>();
         nodeQueue = new LinkedList<>();;
@@ -98,8 +69,12 @@ public class AutocompleteChoi extends Autocomplete<List<String>> {
                 stringQueue.add(accStr + temp.getChild(newChar).getKey());
             }
         }
+
+        node.setValue(result);//set the result list as node's value
         return result;
+        }
     }
+
     /*
     When prefix contains a value(List of strings), use the string
     */
@@ -112,15 +87,15 @@ public class AutocompleteChoi extends Autocomplete<List<String>> {
             List<String> pickList = node.getValue();
             List<String> resultList = getCandidates(prefix);
             if (pickList != null) {
-                if(find(candidate)==null||!find(candidate).isEndState()){//when candidate doesn't exist
+                if(find(candidate)==null||!find(candidate).isEndState()){
                     put(candidate,null);
                     resultList.add(0,candidate);
                     resultList.remove(resultList.size()-1);
                 }
-                else if (resultList.remove(candidate)) {//when candidate is in the list
+                else if (resultList.remove(candidate)) {
                     resultList.add(0, candidate);
                 }
-                else {//not official word existence
+                else {
                     resultList.add(0,candidate);
                 }
                 node.setValue(resultList);
@@ -128,21 +103,26 @@ public class AutocompleteChoi extends Autocomplete<List<String>> {
                 getCandidates(prefix);
                 pickCandidate(prefix, candidate);
             }
+
         }
-        else{//When prefix is not a word.
+        else{
             getCandidates(prefix);
-            List<String> resultList = new ArrayList<>();
-            resultList.add(candidate);
-            node.setValue(resultList);
-            if (!contains(candidate)){
-                if(find(candidate)==null) {
+            if (node.getValue() == null) {
+                List<String> resultList = new ArrayList<>();
+                resultList.add(candidate);
+                if (!contains(candidate))
                     put(candidate, null);
-                }
-                else {
-                    put(candidate,find(candidate).getValue());
-                }
+                node.setValue(resultList);
+            } else {
+                List<String> temp = node.getValue();
+                temp.add(0,candidate);
+                if(temp.size()>getMax())
+                    temp.remove(temp.size()-1);
+                node.setValue(temp);
+                if (!contains(candidate))
+                    put(candidate, null);
             }
         }
     }
-}
 
+    }

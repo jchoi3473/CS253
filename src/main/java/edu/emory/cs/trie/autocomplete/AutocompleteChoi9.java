@@ -5,13 +5,13 @@ import edu.emory.cs.trie.TrieNode;
 
 import java.util.*;
 
-public class AutocompleteChoi extends Autocomplete<List<String>> {
+public class AutocompleteChoi9 extends Autocomplete<List<String>> {
     List<String> result ;
     Queue<String> stringQueue ;
     Queue<TrieNode<List<String>>> nodeQueue;
     TrieNode<List<String>> node;
 
-    public AutocompleteChoi(String dict_file, int max) {
+    public AutocompleteChoi9(String dict_file, int max) {
         super(dict_file, max);
     }
     /*
